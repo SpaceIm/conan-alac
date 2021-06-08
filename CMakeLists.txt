@@ -10,6 +10,7 @@ file(GLOB ALAC_LIB_HDRS source_subfolder/codec/*.h)
 add_library(alac ${ALAC_LIB_SRCS})
 target_include_directories(alac PUBLIC source_subfolder/codec)
 set_property(TARGET alac PROPERTY WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+target_compile_definitions(alac PRIVATE $<$<BOOL:${WIN32}>:TARGET_OS_WIN32>)
 
 install(FILES ${ALAC_LIB_HDRS} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/alac")
 install(TARGETS alac
@@ -22,6 +23,7 @@ if(ALAC_BUILD_UTILITY)
 
     add_executable(alacconvert ${ALAC_CONVERTER_SRCS})
     target_link_libraries(alacconvert PRIVATE alac)
+    target_compile_definitions(alacconvert PRIVATE $<$<BOOL:${WIN32}>:TARGET_OS_WIN32>)
 
     install(TARGETS alacconvert DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()

@@ -1,4 +1,4 @@
-#include <alac/ALACEncoder.h>
+#include <ALACEncoder.h>
 
 int main() {
     ALACEncoder encoder;
